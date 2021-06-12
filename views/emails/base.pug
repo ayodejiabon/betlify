@@ -1,0 +1,30 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='x-apple-disable-message-reformatting')
+  title
+  link(href='https://fonts.googleapis.com/css?family=Roboto:400,600' rel='stylesheet' type='text/css')
+  include _styles
+body(width='100%' style='margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f6fa;')
+    center(style='width: 100%; background-color: #f5f6fa;')
+        table(width='100%' border='0' cellpadding='0' cellspacing='0' bgcolor='#f5f6fa')
+            tr
+                td(style='padding: 40px 0;')
+                    table(style='width:100%;max-width:620px;margin:0 auto;')
+                        tbody
+                            tr
+                                td(style='text-align: center; padding-bottom:25px')
+                                    img(style='height: 60px' src=`${app_logo}` alt='logo')
+                    table(style='width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;')
+                        tbody
+                            block content
+                            tr
+                                td(style='padding: 10px 30px 40px')
+                                    p This code is going to expire after 30 minutes
+                                    p For your account security purposes, do not disclose the contents of this email, If you did not make this request, please contact us or ignore this message.
+                                    br
+                                    p(style='margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;')
+                                        | This is an automatically generated email please do not reply to this email. If you face any issues, please contact us at
+
