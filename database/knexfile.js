@@ -1,3 +1,4 @@
+const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config({path: '../config.env'});
 
@@ -30,10 +31,12 @@ module.exports = {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME
     },
+    ssl: { ca:fs.readFileSync(`${__dirname}/../config/mysql.crt`)},
     pool: {
       min: 2,
       max: 10,
     },
+    seeds: {directory: './seeds'},
     migrations: {
       directory: './migrations',
       tableName: 'migrations',
@@ -54,7 +57,7 @@ module.exports = {
     },
     ssl: { ca:fs.readFileSync(`${__dirname}/../config/mysql.crt`)},
     pool: {min: 2, max: 10},
-    migrations: {directory: './migrations',tableName: 'migrations'},
+    seeds: {directory: './seeds'},
     migrations: {
       directory: './migrations',
       tableName: 'migrations',

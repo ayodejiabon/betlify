@@ -12,7 +12,9 @@ const error = require('../utils/appError');
 
 const client = redis.createClient({
 	host: process.env.REDIS_HOST,
-	port: process.env.REDIS_PORT
+	port: process.env.REDIS_PORT,
+	user:process.env.REDIS_USERNAME,
+	pass:process.env.REDIS_PASSWORD
 });
 
 const set_async = promisify(client.set).bind(client);
