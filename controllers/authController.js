@@ -81,6 +81,8 @@ exports.signup = catchAsync ( async (req, res, next) => {
   		}
   	} catch (err) {
 
+  		console.log(err);
+
   		return res.status(500).json({
 	        status: "failed",
 	        message: `Unable to perform request`
