@@ -6,16 +6,11 @@ const multerGoogleStorage = require('multer-cloud-storage');
 const pool = require('../database/knex');
 const catchAsync = require('../utils/catchAsync');
 const { resolveAccountNumber, listBanks } = require('../controllers/paystackController');
+const client = require('../controllers/redis');
 const { tokenGenerator, getCurrentTime } = require('../utils/helpers');
 const { findAddress, decodeAddress, storage } = require('../controllers/googleController');
 const error = require('../utils/appError');
 
-const client = redis.createClient({
-	host: process.env.REDIS_HOST,
-	port: process.env.REDIS_PORT,
-	user:process.env.REDIS_USERNAME,
-	pass:process.env.REDIS_PASSWORD
-});
 
 const set_async = promisify(client.set).bind(client);
 const get_async = promisify(client.get).bind(client);
@@ -27,7 +22,6 @@ exports.listBanks = catchAsync ( async (req, res, next) => {
   		const banksList = await get_async('banksList');
 
   		if (banksList) {
-
   			return res.status(200).json({
 		        status:"success",
 		        data:JSON.parse(banksList)
@@ -36,7 +30,7 @@ exports.listBanks = catchAsync ( async (req, res, next) => {
 
   		const { body: { status, message, data } }  = await listBanks('NGN');
 
-  		const saveBanks = await set_async('banksList', JSON.stringify(data), 'EX', 60);
+  		const saveBanks = await set_async('banksList', JSON.stringify(data), 'EX', 5184000);
 
   		if (status === true) {
 
@@ -50,6 +44,8 @@ exports.listBanks = catchAsync ( async (req, res, next) => {
   		return next();
 
   	} catch (err) {
+
+  		console.log(err);
 
   		return res.status(500).json({
 	        status: "failed",
